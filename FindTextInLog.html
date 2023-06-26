@@ -12,6 +12,7 @@
 
   const fileSelector = document.getElementById('file-selector')
   fileSelector.addEventListener('change', (event) => {
+    event.preventDefault()
   var fileReader = new FileReader()
     fileReader.onload = function(){
         document.getElementById('fileReade').innerText = fileReader.result
