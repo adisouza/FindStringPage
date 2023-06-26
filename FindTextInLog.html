@@ -1,0 +1,52 @@
+<html>
+<body>
+<input type="file" id="file-selector" multiple>
+<label>find:</label>
+<input id="txtFind" type="text">
+<label>Add quantity charateres:</label>
+<input id="txtPosition" type="text">
+<button onclick="BuscarTexto(event);">search</button>
+<div id="fileReade">
+</div>
+<script>
+
+  const fileSelector = document.getElementById('file-selector')
+  fileSelector.addEventListener('change', (event) => {
+  var fileReader = new FileReader()
+    fileReader.onload = function(){
+        document.getElementById('fileReade').innerText = fileReader.result
+    }
+    fileReader.readAsText( event.target.files[0])
+    })
+
+function BuscarTexto(e){
+e.preventDefault()
+
+let result="";
+let inputText = document.getElementById('txtFind').value
+let inputPosition = document.getElementById('txtPosition').value
+let _len = document.getElementById('fileReade').innerText
+let divFile = _len
+
+    for(let i = 0; i <= _len.length; i++){
+      let postionInicial =  divFile.indexOf(inputText)
+
+      if( postionInicial === -1 ){ 
+        alert(result)
+        break
+
+      }else{
+        let postionFinal = (parseInt(inputPosition) + inputText.length) + parseInt(postionInicial)
+        result += '\n' 
+        + 'numLine = '+ i +' \n' 
+        + divFile.slice(postionInicial,postionFinal) + '\n' 
+        + '========================================' + '\n'
+
+        divFile = divFile.slice(postionFinal + 1)
+      }
+
+  }
+}
+</script>
+</body>
+</html>
