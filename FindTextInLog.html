@@ -22,7 +22,7 @@
 function BuscarTexto(e){
 e.preventDefault()
 
-let result="";
+let result = [];
 let inputText = document.getElementById('txtFind').value
 let inputPosition = document.getElementById('txtPosition').value
 let _len = document.getElementById('fileReade').innerText
@@ -32,15 +32,17 @@ let divFile = _len
       let postionInicial =  divFile.indexOf(inputText)
 
       if( postionInicial === -1 ){ 
-        alert(result)
+       let tagUl = '<ul>';
+result.forEach(line =>{
+  tagUl += '<li>'+line+'</li>'
+
+})
+document.getElementById('fileReade').innerHTML = tagUl + '</ul>';
         break
 
       }else{
         let postionFinal = (parseInt(inputPosition) + inputText.length) + parseInt(postionInicial)
-        result += '\n' 
-        + 'numLine = '+ i +' \n' 
-        + divFile.slice(postionInicial,postionFinal) + '\n' 
-        + '========================================' + '\n'
+        result.push(divFile.slice(postionInicial,postionFinal))
 
         divFile = divFile.slice(postionFinal + 1)
       }
