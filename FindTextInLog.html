@@ -1,11 +1,14 @@
 <html>
 <body>
+  <div id="divTopPesquisa">
 <input type="file" id="file-selector">
 <label>find:</label>
 <input id="txtFind" type="text">
 <label>Add quantity charateres:</label>
 <input id="txtPosition" type="text">
 <button onclick="BuscarTexto(event);">search</button>
+<button id="reloadText" style="visibility: hidden;">reload</button>
+</div>
 <div id="fileReade">
 </div>
 <script>
@@ -16,7 +19,15 @@
   var fileReader = new FileReader()
     fileReader.onload = function(){
         document.getElementById('fileReade').innerText = fileReader.result
+        var button = document.getElementById("reloadText")
+        button.style.visibility='visible'
+        button.addEventListener('click',(event)=> {
+          event.preventDefault()
+          console.log('click')
+          document.getElementById('fileReade').innerText = fileReader.result
+        })
     }
+    console.log(event.target)
     fileReader.readAsText( event.target.files[0])
     })
 
